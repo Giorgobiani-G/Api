@@ -10,7 +10,7 @@ using Microsoft.Extensions.Localization;
 
 namespace LearnApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("v1/FizikPiris")]
     [ApiController]
     public class FizikPirisController : ControllerBase
     {

@@ -10,7 +10,7 @@ using LearnApi.Models;
 namespace LearnApi.Controllers
 {
  
-    [Route("api/[controller]")]
+    [Route("v1/ConnectedPersons")]
     [ApiController]
     public class ConnectedPersonsController : ControllerBase
     {

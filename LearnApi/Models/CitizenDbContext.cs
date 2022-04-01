@@ -19,6 +19,7 @@ namespace LearnApi.Models
         {
             modelBuilder.Entity<FizikPiri>().Property("SaxeliLatinuri").HasColumnType("varchar(50)");
             modelBuilder.Entity<FizikPiri>().Property("GvariLatinuri").HasColumnType("varchar(50)");
+            
         }
 
 

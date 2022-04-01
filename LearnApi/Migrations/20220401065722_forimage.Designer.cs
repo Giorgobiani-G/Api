@@ -4,14 +4,16 @@ using LearnApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LearnApi.Migrations
 {
     [DbContext(typeof(CitizenDbContext))]
-    partial class CitizenDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220401065722_forimage")]
+    partial class forimage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

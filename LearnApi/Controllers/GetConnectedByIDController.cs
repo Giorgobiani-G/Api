@@ -9,7 +9,7 @@ using LearnApi.Models;
 
 namespace LearnApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("v1/GetConnectedByID")]
     [ApiController]
     public class GetConnectedByIDController : ControllerBase
     {

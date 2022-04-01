@@ -29,7 +29,7 @@ namespace LearnApi.Models
         public List<ContactInfo> ContactInfos { get; set; }
         public List<ConnectedPerson> ConnectedPersons { get; set; }
 
-        public Image Image { get; set; }
+        public virtual Image Image { get; set; }
     }
 
     //Fluent Api
