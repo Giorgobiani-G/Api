@@ -21,14 +21,12 @@ namespace LearnApi.Controllers
             _context = context;
         }
 
-        // GET: api/ConnectedPersons
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ConnectedPerson>>> GetConnectedPersons()
         {
             return await _context.ConnectedPersons.ToListAsync();
         }
 
-        // GET: api/ConnectedPersons/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ConnectedPerson>> GetConnectedPerson(int id)
         {
@@ -42,8 +40,6 @@ namespace LearnApi.Controllers
             return connectedPerson;
         }
 
-        // PUT: api/ConnectedPersons/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{Id}")]
         public async Task<IActionResult> PutConnectedPerson(int Id, ConnectedPerson connectedPerson)
         {
@@ -73,18 +69,14 @@ namespace LearnApi.Controllers
             return NoContent();
         }
 
-        // POST: api/ConnectedPersons
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<ConnectedPerson>> PostConnectedPerson(ConnectedPerson connectedPerson)
         {
             _context.ConnectedPersons.Add(connectedPerson);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction("GetConnectedPerson", new { id = connectedPerson.ConnectedPersonId }, connectedPerson);
         }
 
-        // DELETE: api/ConnectedPersons/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteConnectedPerson(int id)
         {

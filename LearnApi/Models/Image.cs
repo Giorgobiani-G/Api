@@ -11,14 +11,8 @@ namespace LearnApi.Models
     public class Image
     {
         public int Id { get; set; }
-       
-      
         public string ImageUrl { get; set; }
-
         public int FizikPiriId { get; set; }
-
-       
         public virtual FizikPiri FizikPiri { get; set; }
-
     }
 }

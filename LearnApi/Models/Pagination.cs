@@ -19,9 +19,7 @@ namespace LearnApi.Models
         {
             PageIndex = pageindex;
             TotalPages = (int)Math.Ceiling(count / (double)pagesize);
-            this.AddRange(items);
-
-
+            AddRange(items);
         }
 
         public Pagination(IEnumerable<T> collection, Task<int> count, int pageindex, int pagesize) : base(collection)
@@ -33,17 +31,14 @@ namespace LearnApi.Models
 
         public bool PreviousPage
         {
-
             get 
             {
                 return (PageIndex > 1);
             }
-
-           
         }
+
         public bool NextPage
         {
-
             get 
             {
                 return (PageIndex < TotalPages);
@@ -57,9 +52,5 @@ namespace LearnApi.Models
             var items = source.Skip((pageindex - 1) * pagesize).Take(pagesize).ToList();
             return new Pagination<T>(items, count, pageindex, pagesize);
         }
-
-    }
-
-
-    
+    }  
 }

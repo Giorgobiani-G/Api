@@ -9,32 +9,22 @@ namespace LearnApi.Models
 {
     public class FizikPiri
     {
-
-
-        
         public int FizikPiriId { get; set; }
-        
         public string Saxeli { get; set; }
+
         [DataType(DataType.Text)]
         public string SaxeliLatinuri { get; set; }
         public string Gvari { get; set; }
         public string GvariLatinuri { get; set; }
-
         public string Piradoba { get; set; }
         public DateTime DabTarigi { get; set; }
-
         public string Misamarti { get; set; }
-
-
         public List<ContactInfo> ContactInfos { get; set; }
         public List<ConnectedPerson> ConnectedPersons { get; set; }
-
         public virtual Image Image { get; set; }
     }
 
-    //Fluent Api
     public class FizikPiriValodator : AbstractValidator<FizikPiri>
-
     {
         public FizikPiriValodator()
         {
@@ -45,6 +35,5 @@ namespace LearnApi.Models
             RuleFor(x => x.DabTarigi).LessThan(DateTime.Today)
                 .WithMessage("dabtarigi arunda ikos momvalshi");
         }
-    
     }
 }

@@ -20,14 +20,10 @@ namespace LearnApi.Controllers
             _context = context;
         }
 
-
-
-        // GET: api/GetConnectedByID/5
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FizikPiri>>> GetConnectedFizikPiri(string Piradoba)
         {
-            //collenction for ids
-            List<int> ids = new List<int>();
+            List<int> ids = new();
 
             var fizikPiri = await _context.FizikPiris.Where(x=>x.Piradoba == Piradoba).FirstOrDefaultAsync();
 
@@ -36,37 +32,28 @@ namespace LearnApi.Controllers
                 return NotFound();
             }
 
-            var connectedbyid = (from Co in _context.ConnectedPersons
-                                
-                                
+            var connectedbyid = (from Co in _context.ConnectedPersons                              
                                  where Co.FizikPiriId == fizikPiri.FizikPiriId
                                  select Co).ToList();
 
-            List<FizikPiri> pirebi = new List<FizikPiri>();
+            List<FizikPiri> pirebi = new();
 
             //adding ids to collections  
             for (int i = 0; i < connectedbyid.Count; i++)
             {
-
                 ids.Add(connectedbyid[i].PersonTobeConnecedId);
             }
 
-            var result = from F in _context.FizikPiris
-                         select F;
-
+            var result = from list in _context.FizikPiris
+                         select list;
 
             foreach (var item in ids)
             {
                 foreach (var it in _context.FizikPiris.Where(x=>x.FizikPiriId==item))
                 {
-
                     pirebi.Add(it);
                 }
             }
-
-
-
-
 
             return pirebi;
         }

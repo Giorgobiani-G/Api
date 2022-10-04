@@ -9,10 +9,7 @@ namespace LearnApi.Logging
     public class LogNLog : ILog
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
-        public LogNLog()
-        {
-
-        }
+        public LogNLog() { }
         public void Debug(string message)
         {
             logger.Debug(message);

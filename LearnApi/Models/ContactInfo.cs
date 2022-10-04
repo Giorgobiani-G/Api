@@ -10,14 +10,9 @@ namespace LearnApi.Models
     public class ContactInfo
     {
         [Key]
-       public int ContactId { get; set; }
-
-
+        public int ContactId { get; set; }
         public int Info { get; set; }
-
-
         public int FizikPiriId { get; set; }
-
-         FizikPiri FizikPiri { get; set; }
+        FizikPiri FizikPiri { get; set; }
     }
 }

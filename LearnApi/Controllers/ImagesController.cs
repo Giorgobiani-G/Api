@@ -22,8 +22,8 @@ namespace LearnApi.Controllers
         private readonly IWebHostEnvironment _env;
         public ImagesController(CitizenDbContext dbContext, IWebHostEnvironment webHostEnvironment)
         {
-            this._dbContext = dbContext;
-            this._env = webHostEnvironment;
+            _dbContext = dbContext;
+            _env = webHostEnvironment;
         }
 
         [HttpGet("{Id}")]
@@ -39,21 +39,16 @@ namespace LearnApi.Controllers
                 return File(b, "image/png");
             }
 
-
             return null;
         }
-
-
 
         [HttpPost]
         public string Post(IFormFile formFile, int id)
         {
-
             try
             {
                 if (formFile.Length > 0)
                 {
-
                     string url = _env.WebRootPath + "\\Uploads\\";
                     if (!Directory.Exists(url))
                     {
@@ -64,39 +59,33 @@ namespace LearnApi.Controllers
                                  select f).Any();
                     if (!exist)
                     {
-                        using (FileStream fileStream = System.IO.File.Create(url + formFile.FileName + id.ToString()))
-                        {
-                            formFile.CopyTo(fileStream);
-                            fileStream.Flush();
-
-                        }
-
+                        using FileStream fileStream = System.IO.File.Create(url + formFile.FileName + id.ToString());
+                        formFile.CopyTo(fileStream);
+                        fileStream.Flush();
                     }
 
+                    Image image = new()
+                    {
+                        FizikPiriId = id,
+                        ImageUrl = url + formFile.FileName + id
+                    };
 
-                    Image image = new();
-
-                    image.FizikPiriId = id;
-                    image.ImageUrl = url + formFile.FileName + id;
                     _dbContext.Images.Add(image);
                     _dbContext.SaveChanges();
-                    return "upload done";
 
+                    return "upload done";
                 }
                 else
                 {
                     return "Failed";
                 }
             }
+
             catch (Exception ex)
             {
-
                 return ex.Message;
             }
-
-
         }
-
 
         [HttpDelete("{id}")]
         public string Delete(int id)
@@ -110,14 +99,10 @@ namespace LearnApi.Controllers
                 System.IO.File.Delete(image.ImageUrl);
             }
 
-
             _dbContext.Images.Remove(image);
             _dbContext.SaveChanges();
             return "Deleted";
         }
-
     }
-
-    
 }
 

@@ -20,14 +20,12 @@ namespace LearnApi.Controllers
             _context = context;
         }
 
-        // GET: api/ContactInfoes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ContactInfo>>> GetContactInfo()
         {
             return await _context.ContactInfo.ToListAsync();
         }
 
-        // GET: api/ContactInfoes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ContactInfo>> GetContactInfo(int id)
         {
@@ -41,8 +39,6 @@ namespace LearnApi.Controllers
             return contactInfo;
         }
 
-        // PUT: api/ContactInfoes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutContactInfo(int id, ContactInfo contactInfo)
         {
@@ -72,8 +68,6 @@ namespace LearnApi.Controllers
             return NoContent();
         }
 
-        // POST: api/ContactInfoes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<ContactInfo>> PostContactInfo(ContactInfo contactInfo)
         {
@@ -83,11 +77,11 @@ namespace LearnApi.Controllers
             return CreatedAtAction("GetContactInfo", new { id = contactInfo.ContactId }, contactInfo);
         }
 
-        // DELETE: api/ContactInfoes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteContactInfo(int id)
         {
             var contactInfo = await _context.ContactInfo.FindAsync(id);
+
             if (contactInfo == null)
             {
                 return NotFound();

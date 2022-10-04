@@ -19,10 +19,9 @@ namespace LearnApi.Controllers
 
         public FizikPirisController(CitizenDbContext context, IStringLocalizer<FizikPirisController> localizer)
         {
-            this._localizer = localizer;
+            _localizer = localizer;
             _context = context;
         }
-
 
         //Localization: Accept-Language Header : en-US, ka-GE
 
@@ -32,31 +31,21 @@ namespace LearnApi.Controllers
         //    return _localizer["Message"].Value;
         //}
 
-
-
-        //GET: api/FizikPiris
-       [HttpGet]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<FizikPiri>>> GetFizikPiris(int pagenumber = 1, int pagesize = 4)
         {
-
-            //throw new Exception("TESt");
-            return  await Pagination<FizikPiri>.CreateAsync(_context.FizikPiris.OrderBy(o => o.Saxeli).Include(inc => inc.ContactInfos)
+            return await Pagination<FizikPiri>.CreateAsync(_context.FizikPiris.OrderBy(o => o.Saxeli).Include(inc => inc.ContactInfos)
                 //.Include(inc=> inc.Image)
                 .Include(inc => inc.ConnectedPersons), pagenumber, pagesize);
-
-
         }
 
-
-
-        // GET: api/FizikPiris/5
         [HttpGet("{id}")]
         public async Task<ActionResult<FizikPiri>> GetFizikPiri(int id)
         {
-            var fizikPiri = await _context.FizikPiris.Where(x=>x.FizikPiriId==id).
+            var fizikPiri = await _context.FizikPiris.Where(x => x.FizikPiriId == id).
                 Include(inc => inc.ContactInfos).
                 //Include(inc => inc.Image).
-                Include(inc=>inc.ConnectedPersons).FirstOrDefaultAsync();
+                Include(inc => inc.ConnectedPersons).FirstOrDefaultAsync();
 
             if (fizikPiri == null)
             {
@@ -66,8 +55,6 @@ namespace LearnApi.Controllers
             return fizikPiri;
         }
 
-        // PUT: api/FizikPiris/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFizikPiri(int id, FizikPiri fizikPiri)
         {
@@ -97,13 +84,13 @@ namespace LearnApi.Controllers
             return NoContent();
         }
 
-        // POST: api/FizikPiris
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<FizikPiri>> PostFizikPiri(FizikPiri fizikPiri)
         {
             var varlidator = new FizikPiriValodator();
+
             var result = varlidator.Validate(fizikPiri);
+
             if (result.IsValid)
             {
                 _context.FizikPiris.Add(fizikPiri);
@@ -111,11 +98,10 @@ namespace LearnApi.Controllers
 
                 return CreatedAtAction("GetFizikPiri", new { id = fizikPiri.FizikPiriId }, fizikPiri);
             }
+
             return BadRequest(result.Errors);
-            
         }
 
-        // DELETE: api/FizikPiris/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFizikPiri(int id)
         {

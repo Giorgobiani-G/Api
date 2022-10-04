@@ -38,8 +38,6 @@ namespace LearnApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
           
-
-
             services.AddLocalization(opt => opt.ResourcesPath = "Resources");
             services.Configure<RequestLocalizationOptions>(
                 op =>
@@ -48,38 +46,28 @@ namespace LearnApi
                     {
                         new CultureInfo("en-US"),
                         new CultureInfo("ka-GE")
-
                     };
 
                     op.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(culture: "en-US", uiCulture: "en-US");
                     op.SupportedCultures = supportedcultures;
                     op.SupportedUICultures = supportedcultures;
-                    
-
-
                 });
                 
-
             services.AddControllers().AddNewtonsoftJson(options=> options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
                 .AddFluentValidation(fv=>
                 {
                     fv.DisableDataAnnotationsValidation = true;
-                    fv.RegisterValidatorsFromAssemblyContaining<Startup>();
-
-                    
+                    fv.RegisterValidatorsFromAssemblyContaining<Startup>();                  
                  });
 
             services.AddSingleton<ILog, LogNLog>();
             
-            services.AddDbContext<CitizenDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Con")));
-            
+            services.AddDbContext<CitizenDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Con")));         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILog logger)
         {
-           
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -98,8 +86,6 @@ namespace LearnApi
 
             var localizeoptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(localizeoptions.Value);
-
-
 
             app.UseRouting();
 
